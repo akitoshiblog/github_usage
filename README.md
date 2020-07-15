@@ -1,7 +1,5 @@
 # This document explains about git architecture and git usage. 
 
-[a documentation about markdon writing is here](./markdown.md)
-
 
 ## The first thing. 
 **git and github is totally different thing.**   
