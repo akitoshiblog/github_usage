@@ -1,0 +1,157 @@
+original /  brach 
+
+############ References ############
+# GitHub登録からプッシュまでの流れ
+https://qiita.com/KosukeQiita/items/cf39d2922b77ac93f51d
+ 
+# The requested URL returned error: 403 Forbidden 
+https://github.com/trilbymedia/grav-plugin-git-sync/issues/39
+
+############## simple usage ########### 
+####### start up #### 
+# make repository from GitHub Homepage 
+
+# user setting
+git init 
+git remote add <name(origin)> <repository url> 
+git pull origin master
+git config --global user.name "user-name" 
+git config --global user.email "mail-address"
+
+###### add data ####
+git pull origin master
+git add .  
+git commit -m "comment"
+git push origin master 
+
+
+##### work local branch and merge it to master branch #####
+git branch <new branch name> <reference branch>
+# Ex.  git branch test origin/master
+
+# change branch can be done by 
+git checkout <branch name>
+
+# push is same procedures 
+git add .
+git commit -m "comment"
+git push origin <branch name>
+
+
+# merge a branch to the master branch 
+git checkout master
+git merge <branch name> 
+
+
+# delete branch 
+git branch -d <branch name> 
+
+# if not merged fully, force to delete is 
+git branch -D <branch name>
+
+
+# check merged branch, based on <branch name>
+git branch --meged <branch name>
+
+
+
+
+
+-if original is not changed, make branch, edit data, publish branch, comment, merge branch. These process is not problem. 
+
+-If original is not changed at first, make branch, edit data. At this time, change original in master, and then publish branch. Can’t it merge successfully ? and changed original data can be saved ?
+
+-If original is not changed at first, make branch, edit data. At this time, change original in master, and then publish branch.
+	we can download both of data in master and test. 
+
+-Lesson from this practice: 
+	If you edit data, prevent others from doing same works.
+	if you want to edit data in master, finish it before others touch data in master.
+		if someone edit this data, you can no longer publish it to master. 
+	If you want to edit one data for long time, be sure to make branch, and do work in that branch.
+
+
+—git hub cheat sheet 
+https://gist.github.com/cferdinandi/ef665330286fd5d7127d
+
+git pull [ url ] [ branch ] 
+	pulling data in urls. 
+
+# delete project 
+git branch -d [ branch name ]    # deletes local branch 
+
+—— if you want to edit data in master 
+cd [ path to local repository ]
+git pull   # up to date 
+### edit file ### 
+git add .
+git commit -m “ comment “
+git push 
+
+this is enough 
+
+if you want to work and edit in branch 
+git branch  # check what kind of branch exists in “ local repository” 
+git checkout [ branch name 1  ] 
+	if make new branch , git checkout -b [branch name 1]
+git pull [ remote urls ] [ branch name 1  ]   # update branch. 
+### edit file ###  
+git add . 
+git commit -m “ comment “ 
+git push [ remote ] [ branch name 1] 
+
+—test part 
+master - origin 
+i make branch from origin 
+add different files to master and branch called develop 
+
+- manipulate in local repository , and in develop 
+git pull [ remote ] develop   - just update develop not pulling new files in master 
+git pull [ remote ] master  - merge with master, so that check appears.
+
+ manipulate in local repository , and in master 
+git pull [ remote ] master - merge with develop, so that check appears again  
+
+-about add, commit , push 
+# for reflecting changes in local repository to remote repository. 
+cd Documents/GitHub/RNN_learning_group
+
+変更したファイルをmasterに反映させる為のコマンド。
+cd Documents/GitHub/RNN_learning_group
+git add . 
+git commit -m “ message “ 
+git push origin master 
+
+-about branch editing in terminal 
+https://qiita.com/samurairunner/items/7442521bce2d6ac9330b
+
+cd [ project_name ]
+
+git checkout -b develop 
+
+“ edit “ 
+git add .
+git commit -m “ message” 
+git push origin develop 
+
+and make pull request in GitHub repository on the internet. 
+confirm merge by other owners. 
+
+-about git-forgot command.
+
+https://qiita.com/ka0ru19/items/1a8ff0fb9e945ef01256#2:%20%E6%97%A2%E3%81%AB%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%82%92%E7%99%BB%E9%8C%B2%E3%81%97%E3%81%9F%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E5%A4%89%E6%9B%B4%E3%82%92commit,push%E3%81%99%E3%82%8B 
+
+Add Git Branch Name to Terminal Prompt (Mac)
+Open ~/.bash_profile in your favorite editor and add the following content to the bottom.
+# Git branch in prompt.
+
+parse_git_branch() {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
+export PS1="\u@\h \W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] $ "
+
+
+- for not forgetting add , commit, push in git hub. 
+
+https://qiita.com/suin/items/dde9204193bddefe8107
